@@ -7,6 +7,8 @@ import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import { getProfile, getHomePage, getAllSkills } from "@/src/lib/archive";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [profile, home, skills] = await Promise.all([
     getProfile(),
