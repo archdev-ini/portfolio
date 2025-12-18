@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { fetchResearchArticles } from "@/src/lib/rss";
-import { SYSTEM_METADATA } from "@/src/data/metadata";
 import { Profile } from "@/src/lib/archive";
 
 export default async function Research({ profile }: { profile?: Profile }) {
-  const articles = await fetchResearchArticles(profile?.substackUrl || SYSTEM_METADATA.substackRss);
+  const articles = await fetchResearchArticles(profile?.substackUrl || "");
   
   // If no articles found, we render nothing (or the empty map)
   const displayArticles = articles;

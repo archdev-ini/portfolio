@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SYSTEM_METADATA } from "@/src/data/metadata";
 import { Profile, HomePage } from "@/src/lib/archive";
 
 interface FooterProps {
@@ -10,9 +9,9 @@ interface FooterProps {
 export default function Footer({ profile, home }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
-  const name = profile?.name || SYSTEM_METADATA.name;
-  const tagline = home?.heroTagline || SYSTEM_METADATA.tagline;
-  const location = profile?.location || SYSTEM_METADATA.location.base;
+  const name = profile?.name;
+  const tagline = home?.heroTagline;
+  const location = profile?.location;
 
   return (
     <footer className="w-full px-6 py-12 border-t border-border mt-20">
