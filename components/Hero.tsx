@@ -13,7 +13,7 @@ interface HeroProps {
 }
 
 export default function Hero({ home, profile }: HeroProps) {
-  const startYear = "2020";
+  const startYear = 2020; // Fixed type error
   const currentYear = new Date().getFullYear();
   const yearRange = currentYear > startYear ? `${startYear}—${currentYear}` : `${startYear}`;
 
