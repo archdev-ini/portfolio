@@ -7,21 +7,12 @@ import { Profile } from "@/src/lib/archive";
 export default async function Research({ profile }: { profile?: Profile }) {
   const articles = await fetchResearchArticles(profile?.substackUrl || SYSTEM_METADATA.substackRss);
   
-  // If no articles found (e.g. invalid RSS), use placeholders for the demo
-  const displayArticles = articles.length > 0 ? articles : [
-    {
-      title: "On the Ephemeral City: Lagos as a Living Organism",
-      description: "Speculative Essays",
-      pubDate: "2024",
-      link: "#",
-    },
-    {
-      title: "Algorithmic Heritage: Coding Culture into Space",
-      description: "Digital Futures",
-      pubDate: "2023",
-      link: "#",
-    }
-  ];
+  // If no articles found, we render nothing (or the empty map)
+  const displayArticles = articles;
+
+  if (!displayArticles || displayArticles.length === 0) {
+    return null;
+  }
   return (
     <section id="research" className="py-24 px-6 border-t border-border">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
