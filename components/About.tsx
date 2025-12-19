@@ -1,4 +1,4 @@
-import { PortableText } from "next-sanity";
+// PortableText import removed
 import { HomePage } from "@/src/lib/archive";
 
 export default function About({ home }: { home?: HomePage }) {
@@ -20,7 +20,7 @@ export default function About({ home }: { home?: HomePage }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 font-sans text-sm text-muted leading-relaxed text-justify">
             {home?.aboutText ? (
                 <div className="col-span-2 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <PortableText value={home.aboutText} />
+                    <p>{home.aboutText}</p>
                 </div>
             ) : (
                 <>

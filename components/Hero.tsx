@@ -3,22 +3,23 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { PortableText } from "next-sanity";
+// PortableText import removed
 // SYSTEM_METADATA import removed
-import { HomePage, Profile } from "@/src/lib/archive";
+import { HomePage, Profile, Theme } from "@/src/lib/archive";
 
 interface HeroProps {
   home?: HomePage;
   profile?: Profile;
+  activeTheme?: Theme;
 }
 
-export default function Hero({ home, profile }: HeroProps) {
-  const startYear = 2020; // Fixed type error
+export default function Hero({ home, profile, activeTheme }: HeroProps) {
+  const startYear = profile?.startYear || 2020;
   const currentYear = new Date().getFullYear();
   const yearRange = currentYear > startYear ? `${startYear}—${currentYear}` : `${startYear}`;
 
   const location = profile?.location;
-  const availability = profile?.availability;
+
 
   return (
     <section className="min-h-screen w-full flex flex-col justify-center px-6 relative overflow-hidden py-20">
@@ -37,7 +38,7 @@ export default function Hero({ home, profile }: HeroProps) {
           </span>
           
           <div className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-foreground mix-blend-multiply text-balance">
-            {home?.heroHeadline && <PortableText value={home.heroHeadline} />}
+            {home?.heroHeadline}
           </div>
 
           <div className="h-px w-24 bg-foreground mt-8 mb-8" />
@@ -51,7 +52,7 @@ export default function Hero({ home, profile }: HeroProps) {
             className="group flex items-center gap-3 w-fit mt-4 font-mono text-xs uppercase tracking-[0.2em] text-foreground hover:text-muted transition-colors"
           >
             <span className="relative">
-              {availability}
+              Explore Themes
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-current group-hover:w-full transition-all duration-300" />
             </span>
             <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -73,7 +74,7 @@ export default function Hero({ home, profile }: HeroProps) {
         <span className="animate-bounce md:absolute md:left-1/2 md:-translate-x-1/2">↓ Scroll to explore</span>
         <div className="text-right flex flex-col gap-1">
           <span>Systems / Design</span>
-          <span className="opacity-50">Ref: Radiant Archive</span>
+          <span className="opacity-50">Ref: {activeTheme?.title || "Global Research"}</span>
         </div>
       </motion.div>
     </section>

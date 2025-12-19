@@ -3,20 +3,21 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  transpilePackages: ['sanity', 'next-sanity'],
-  async redirects() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: '/studio',
-        destination: 'http://localhost:3333',
-        permanent: false,
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
       },
       {
-        source: '/studio/:path*',
-        destination: 'http://localhost:3333/:path*',
-        permanent: false,
-      },
-    ]
+         protocol: 'http',
+         hostname: '127.0.0.1',
+         port: '1337',
+         pathname: '/uploads/**',
+      }
+    ],
   },
 };
 

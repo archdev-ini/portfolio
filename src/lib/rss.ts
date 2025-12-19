@@ -7,12 +7,21 @@ export interface ResearchArticle {
 
 export async function fetchResearchArticles(url: string): Promise<ResearchArticle[]> {
   try {
-    const response = await fetch(url);
+    console.log("Fetching RSS from:", url);
+    if (!url) return [];
+    
+    const response = await fetch(url, { next: { revalidate: 3600 } });
+    if (!response.ok) {
+        console.error("RSS Fetch failed:", response.status, response.statusText);
+        return [];
+    }
     const xml = await response.text();
+    console.log("RSS XML received (length):", xml.length);
     
     // Minimal XML parsing using regex for the sake of simplicity and zero-deps
     // In a real production app, use an actual XML parser like 'rss-parser'
     const items = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
+    console.log("RSS Items found:", items.length);
     
     return items.slice(0, 5).map(item => {
       const title = item.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/)?.[1] || 

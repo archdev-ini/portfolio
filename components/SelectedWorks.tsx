@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllProjects } from "@/src/lib/archive";
 
 export default async function SelectedWorks() {
@@ -20,11 +21,22 @@ export default async function SelectedWorks() {
           {displayProjects.map((project, idx) => (
             <Link href={`/themes/current#project-${project.id}`} key={project.id} className="group block cursor-pointer">
               <div className="w-full aspect-4/5 bg-border/30 overflow-hidden relative mb-6">
-                 {/* Placeholder for actual images */}
-                 <div className="absolute inset-0 bg-muted/10 group-hover:bg-muted/20 transition-colors" />
-                 <div className="absolute bottom-4 left-4 font-mono text-xs text-muted opacity-50">
-                    IMG_0{idx + 1}
-                 </div>
+                 {project.imageUrl ? (
+                     <Image 
+                       src={project.imageUrl} 
+                       alt={project.title} 
+                       fill 
+                       className="object-cover transition-transform duration-700 group-hover:scale-105"
+                     />
+                 ) : (
+                   <>
+                     {/* Placeholder for actual images */}
+                     <div className="absolute inset-0 bg-muted/10 group-hover:bg-muted/20 transition-colors" />
+                     <div className="absolute bottom-4 left-4 font-mono text-xs text-muted opacity-50">
+                        IMG_0{idx + 1}
+                     </div>
+                   </>
+                 )}
               </div>
               
               <div className="flex flex-col gap-2">

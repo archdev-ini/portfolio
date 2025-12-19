@@ -1,6 +1,6 @@
 "use client";
 
-import { Theme } from "@/src/data/themes";
+import { Theme } from "@/src/lib/archive";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
